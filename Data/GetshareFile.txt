@@ -1,0 +1,42 @@
+☒ Command Prompt X + v
+) - X
+Clean Agent: 000463
+Ext:
+Ext: 1 file(s) copied.
+1 file(s) copied.
+S:\Shared Folders\INA\AofA>echo move complete, invalids now
+move complete, invalids now
+S:\Shared Folders\INA\AofA>REM back loop through all files remaining and to
+move invalid folder
+S:\Shared Folders\INA\AofA>for /F "delims=" %F in ('dir /b *.*') do (
+"%~F"
+copy "S:\Shared Folders\INA\AofA Invalid"
+del "%~F"
+REM 2 commands above should be copy/del
+)
+S:\Shared Folders\INA\AofA>(
+"elite
+copy restaurant partners" "S:\Shared Folders\INA\AofA Invalid"
+del "elite restaurant partners"
+REM 2 commands above should be copy/del
+)
+elite restaurant partners\2374497agent000062.pdf
+elite restaurant partners\MULTIPLEagent000062.pdf
+2 file(s) copied.
+S:\Shared Folders\INA\AofA\elite restaurant partners\*, Are (Y/N)?
+sure you Y
+S:\Shared Folders\INA\AofA>endlocal
+S:\Shared Folders\INA\AofA>goto :eof
+S:\Shared Folders\INA\AofA>Y
+'Y' is not recognized as internal
+an external
+or command,
+operable batch
+program or file.
+S:\Shared Folders\INA\AofA>Y
+'Y' is not recognized as internal
+an external
+or command,
+operable batch
+program or file.
+S:\Shared Folders\INA\AofA>
