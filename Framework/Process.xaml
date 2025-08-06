@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1112,10031.2</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1028,10432.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="50">
@@ -139,7 +139,7 @@
       <AssemblyReference>System.Drawing.Common</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1038.4,10524" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1038.4,10288" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="Cmd_ScreenExist" />
       <Variable x:TypeArguments="x:String" Name="ScriptFilesFullPath" />
@@ -158,7 +158,7 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_SqlSelectQuery">[in_Config("SqlReportSelectQuery").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_SqlInsertQuery">[in_Config("SqlReportCreateQuery").ToString]</InArgument>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_retryCntr">[Cint(in_Config("RetryNumberGetTransactionItem"))]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_SQLServerName">[If(Environment.MachineName.ToString.StartsWith("D-WFBOT"),in_Config("SqlReportServername").ToString,in_Config("SqlReportServername_Prod").ToString)]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_SQLServerName">[If(Environment.MachineName.ToString.StartsWith("D-WFBOT") Or Environment.MachineName.ToString.StartsWith("Q-WFBOT"),in_Config("SqlReportServername").ToString,in_Config("SqlReportServername_Prod").ToString)]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_SqlDatabaseName">[in_Config("SqlReportDatabaseName").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_SqlAuthentication">[in_Config("AAP_50_ReportingDBCredentials").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_SqlConnectionString">[in_Config("SqlConnectionString").ToString]</InArgument>
@@ -172,7 +172,7 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_ParcelTotalCount">[in_TransactionItem.SpecificContent("DB_TotalParcelsCount").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Login into Cmd " Condition="[Cmd_ScreenExist = False]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="976,889.6" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Login into Cmd " Condition="[Cmd_ScreenExist = False]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="976,116" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
       <ui:InterruptibleDoWhile.Body>
         <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,712" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <sap:WorkflowViewStateService.ViewState>
@@ -219,7 +219,7 @@
       </ui:InterruptibleDoWhile.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
@@ -402,7 +402,8 @@
         </ui:Target>
       </ui:TypeInto.Target>
     </ui:TypeInto>
-    <Delay DisplayName="Delay - 3 mints dealy after scripts run" Duration="00:03:00" sap:VirtualizedContainerService.HintSize="976,122.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="976,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Dealy timeout is activated bot will wait for 3 mints&quot;]" />
+    <Delay DisplayName="Delay - 3 mints dealy after scripts run" Duration="00:00:15" sap:VirtualizedContainerService.HintSize="976,122.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
     <ui:UiElementExists DisplayName="Element Exists 'Windows.UI.Composition....'" Exists="[Cmd_ScreenExist]" sap:VirtualizedContainerService.HintSize="976,139.2" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
       <ui:UiElementExists.Target>
         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0090c095-7a85-411c-a0e6-5eb3a8cde0e8" InformativeScreenshot="b43083f8cc20346bedd735289bd3280b" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft.WindowsTerminal*' title='C*' /&gt;&lt;wnd cls='Windows.UI.Composition.DesktopWindowContentBridge' title='DesktopWindowXamlSource' /&gt;" TimeoutMS="5000" WaitForReady="COMPLETE" />
@@ -414,7 +415,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:UiElementExists>
-    <If Condition="[Cmd_ScreenExist = True]" sap:VirtualizedContainerService.HintSize="976,4123.2" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[Cmd_ScreenExist = True]" sap:VirtualizedContainerService.HintSize="976,4032" sap2010:WorkflowViewState.IdRef="If_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -422,11 +423,10 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="942.4,3848" sap2010:WorkflowViewState.IdRef="Sequence_27">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="942.4,3756.8" sap2010:WorkflowViewState.IdRef="Sequence_27">
           <Sequence.Variables>
             <Variable x:TypeArguments="s:DateTime" Name="StartTime" />
             <Variable x:TypeArguments="s:String[]" Name="Arr_GetShareFileFullPath" />
-            <Variable x:TypeArguments="x:Boolean" Name="boolExitLoop" />
             <Variable x:TypeArguments="x:Boolean" Name="Bool_CheckingFolder" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
@@ -443,14 +443,6 @@
               <InArgument x:TypeArguments="s:DateTime">[Now]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign - intalizing" sap:VirtualizedContainerService.HintSize="880,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-            </Assign.Value>
-          </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="880,113.6" sap2010:WorkflowViewState.IdRef="Assign_11">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
@@ -459,217 +451,153 @@
               <InArgument x:TypeArguments="x:Boolean">False</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="880,3418.4" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+          <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="880,3364.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_4">
             <ui:InterruptibleDoWhile.Body>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="846.4,3280.8" sap2010:WorkflowViewState.IdRef="Sequence_29">
-                <Sequence.Variables>
-                  <Variable x:TypeArguments="x:Boolean" Name="GetShareFile_Exist" />
-                </Sequence.Variables>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="846.4,3218.4" sap2010:WorkflowViewState.IdRef="Sequence_52">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign sap:VirtualizedContainerService.HintSize="784,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="s:String[]">[Arr_GetShareFileFullPath]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("S:\Shared Folders\INA\AofA\","*.pdf")]</InArgument>
-                  </Assign.Value>
-                </Assign>
-                <If Condition="[Arr_GetShareFileFullPath.Count &gt; 0]" DisplayName="If  Checking ExitLoop Validations" sap:VirtualizedContainerService.HintSize="784,3078.4" sap2010:WorkflowViewState.IdRef="If_10">
+                <Sequence sap:VirtualizedContainerService.HintSize="784,3053.6" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="OCR_Text" />
+                    <Variable x:TypeArguments="x:String" Name="GetShareFileText" />
+                    <Variable x:TypeArguments="x:String" Name="ReadTextFile" />
+                    <Variable x:TypeArguments="s:String[]" Name="Arr_TextFile_Data" />
+                    <Variable x:TypeArguments="x:Boolean" Name="GetShareFiles_Exist" />
+                  </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If.Then>
-                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,83.2" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <If Condition="[Now.Subtract(StartTime).TotalSeconds&gt;3600]" DisplayName="If 1 hour is completed and notify via send the email like still bot is running" sap:VirtualizedContainerService.HintSize="529.6,674.4" sap2010:WorkflowViewState.IdRef="If_8">
+                  <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[GetShareFiles_Exist]" sap:VirtualizedContainerService.HintSize="721.6,148" sap2010:WorkflowViewState.IdRef="PathExists_5" Path="Data\GetshareFile.txt" PathType="File" />
+                  <If Condition="[GetShareFiles_Exist = True]" sap:VirtualizedContainerService.HintSize="721.6,468" sap2010:WorkflowViewState.IdRef="If_16">
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,192.8" sap2010:WorkflowViewState.IdRef="Sequence_45">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <If.Then>
-                          <Sequence DisplayName="Notifying via email." sap:VirtualizedContainerService.HintSize="496,372.8" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Notifications\SendNotificationEmail.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\SendNotificationEmail.xaml">
-                              <ui:InvokeWorkflowFile.Arguments>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_ApplicationID">[in_Config("AAP_50_AzureApplicationID").ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_TenantID">[in_Config("AAP_50_AzureTenantID").ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_ClientCredentialsName">[in_Config("O365ClientCredential").ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_ToEmailList">[in_Config("Email_To").ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_Subject">["Bot Running Smoothly– PDF Files Still Available in Shared Location and Machine Name is: "+Environment.MachineName.ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_Body">["The bot is functioning correctly, and PDF files are still present in the shared file location. The current count of available PDFs is: "+Arr_GetShareFileFullPath.Count.ToString]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="In_Screenshot">[Nothing]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_Account">[in_Config("Email_Id").ToString]</InArgument>
-                              </ui:InvokeWorkflowFile.Arguments>
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </ui:InvokeWorkflowFile>
-                            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_8">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <Delay DisplayName="Delay - for 5 mints" Duration="00:05:00" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Delay_3" />
-                          </Sequence>
-                        </If.Then>
-                        <If.Else>
-                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="496,490.4" sap2010:WorkflowViewState.IdRef="Sequence_30">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Bot is running and still pdf files available in share file location and still pdf count is: &quot;+Arr_GetShareFileFullPath.Count.ToString]" />
-                            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <Delay DisplayName="Delay - for 5 mints" Duration="00:05:00" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Delay_4" />
-                          </Sequence>
-                        </If.Else>
-                      </If>
-                    </Sequence>
-                  </If.Then>
-                  <If.Else>
-                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="750.4,2833.6" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                      <Sequence sap:VirtualizedContainerService.HintSize="688,2640" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                        <Sequence.Variables>
-                          <Variable x:TypeArguments="x:String" Name="OCR_Text" />
-                          <Variable x:TypeArguments="x:String" Name="GetShareFileText" />
-                          <Variable x:TypeArguments="x:String" Name="ReadTextFile" />
-                          <Variable x:TypeArguments="s:String[]" Name="Arr_TextFile_Data" />
-                          <Variable x:TypeArguments="x:Boolean" Name="GetShareFiles_Exist" />
-                        </Sequence.Variables>
+                        <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="353.6,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_3" Path="Data\GetshareFile.txt" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_46">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[GetShareFiles_Exist]" sap:VirtualizedContainerService.HintSize="625.6,148" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="Data\GetshareFile.txt" PathType="File" />
-                        <If Condition="[GetShareFiles_Exist = True]" sap:VirtualizedContainerService.HintSize="625.6,468" sap2010:WorkflowViewState.IdRef="If_12">
-                          <If.Then>
-                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,192.8" sap2010:WorkflowViewState.IdRef="Sequence_38">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="353.6,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="Data\GetshareFile.txt" />
-                            </Sequence>
-                          </If.Then>
-                          <If.Else>
-                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_39">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                            </Sequence>
-                          </If.Else>
-                        </If>
-                        <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'Windows.UI.Composition....'" sap:VirtualizedContainerService.HintSize="625.6,204" sap2010:WorkflowViewState.IdRef="GetOCRText_1">
-                          <ui:GetOCRText.OCREngine>
-                            <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
-                              <ActivityFunc.Argument>
-                                <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
-                              </ActivityFunc.Argument>
-                              <p:UiPathDocumentOCR Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="ZFyVk/UIAN8B5x8TgIzwg7jNbTM14iiJGoGBvPwOpTUDEj65KrhOEYTp828fKCA1oG+27QrR7Xi0r/vOcz1JYw==" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" Endpoint="https://du.uipath.com/ocr" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_1" Image="[Image]" Language="auto" NoopExecution="False" Profile="None" Scale="1" Timeout="100000" />
-                            </ActivityFunc>
-                          </ui:GetOCRText.OCREngine>
-                          <ui:GetOCRText.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7cf42528-085c-4bf5-9137-ade4d7a95896" InformativeScreenshot="ea91b50338d76e28b903456254442039" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft*' title='C*' /&gt;&lt;wnd cls='Windows.UI.Composition.DesktopWindowContentBridge' title='DesktopWindowXamlSource' /&gt;" WaitForReady="COMPLETE">
-                              <ui:Target.TimeoutMS>
-                                <InArgument x:TypeArguments="x:Int32" />
-                              </ui:Target.TimeoutMS>
-                            </ui:Target>
-                          </ui:GetOCRText.Target>
-                          <ui:GetOCRText.Text>
-                            <OutArgument x:TypeArguments="x:String">[OCR_Text]</OutArgument>
-                          </ui:GetOCRText.Text>
-                        </ui:GetOCRText>
-                        <Assign sap:VirtualizedContainerService.HintSize="625.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_9">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:String">[GetShareFileText]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">Data\GetshareFile.txt</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="625.6,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[OCR_Text]" />
-                        <ui:ReadTextFile File="{x:Null}" Content="[ReadTextFile]" DisplayName="Read Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="625.6,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-                        <Assign sap:VirtualizedContainerService.HintSize="625.6,112.8" sap2010:WorkflowViewState.IdRef="Assign_10">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="s:String[]">[Arr_TextFile_Data]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="s:String[]">[ReadTextFile.ToString.Split(Environment.NewLine.ToCharArray)]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="625.6,1193.6" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[Arr_TextFile_Data]">
-                          <ui:ForEach.Body>
-                            <ActivityAction x:TypeArguments="x:String">
-                              <ActivityAction.Argument>
-                                <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
-                              </ActivityAction.Argument>
-                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="592,1056" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'Windows.UI.Composition....'" sap:VirtualizedContainerService.HintSize="721.6,204" sap2010:WorkflowViewState.IdRef="GetOCRText_2">
+                    <ui:GetOCRText.OCREngine>
+                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                        <ActivityFunc.Argument>
+                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                        </ActivityFunc.Argument>
+                        <p:UiPathDocumentOCR Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="ZFyVk/UIAN8B5x8TgIzwg7jNbTM14iiJGoGBvPwOpTUDEj65KrhOEYTp828fKCA1oG+27QrR7Xi0r/vOcz1JYw==" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" Endpoint="https://du.uipath.com/ocr" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_2" Image="[Image]" Language="auto" NoopExecution="False" Profile="None" Scale="1" Timeout="100000" />
+                      </ActivityFunc>
+                    </ui:GetOCRText.OCREngine>
+                    <ui:GetOCRText.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7cf42528-085c-4bf5-9137-ade4d7a95896" InformativeScreenshot="ea91b50338d76e28b903456254442039" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft*' title='C*' /&gt;&lt;wnd cls='Windows.UI.Composition.DesktopWindowContentBridge' title='DesktopWindowXamlSource' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:GetOCRText.Target>
+                    <ui:GetOCRText.Text>
+                      <OutArgument x:TypeArguments="x:String">[OCR_Text]</OutArgument>
+                    </ui:GetOCRText.Text>
+                  </ui:GetOCRText>
+                  <Assign sap:VirtualizedContainerService.HintSize="721.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[GetShareFileText]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">Data\GetshareFile.txt</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="721.6,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[OCR_Text]" />
+                  <ui:ReadTextFile File="{x:Null}" Content="[ReadTextFile]" DisplayName="Read Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="721.6,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+                  <Assign sap:VirtualizedContainerService.HintSize="721.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_16">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:String[]">[Arr_TextFile_Data]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:String[]">[ReadTextFile.ToString.Split(Environment.NewLine.ToCharArray)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="721.6,1606.4" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[Arr_TextFile_Data]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:String">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="688,1468.8" sap2010:WorkflowViewState.IdRef="Sequence_51">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If Condition="[currentText.Tostring.ToLower.Contains(&quot;Are you sure (Y/N)?&quot;.ToLower) And Bool_CheckingFolder = False Or currentText.Tostring.ToLower.Contains(&quot;Are (Y/N)?&quot;.ToLower)  And Bool_CheckingFolder = False]" DisplayName="If Inside folder is exist then this will execute" sap:VirtualizedContainerService.HintSize="625.6,1380" sap2010:WorkflowViewState.IdRef="If_17">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,612.8" sap2010:WorkflowViewState.IdRef="Sequence_47">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <If Condition="[currentText.Tostring.ToLower.Contains(&quot;Are you sure (Y/N)?&quot;.ToLower) And Bool_CheckingFolder = False Or currentText.Tostring.ToLower.Contains(&quot;Are (Y/N)?&quot;.ToLower)  And Bool_CheckingFolder = False]" sap:VirtualizedContainerService.HintSize="529.6,967.2" sap2010:WorkflowViewState.IdRef="If_11">
+                                <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type into Exit the cmd window" sap:VirtualizedContainerService.HintSize="433.6,188" sap2010:WorkflowViewState.IdRef="TypeInto_7" Text="Y[k(enter)]">
+                                  <ui:TypeInto.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b9830598-c243-413c-baf9-d4703a8b4013" InformativeScreenshot="db2214a16e07d5dc9a1d42fca81fa49b" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft.WindowsTerminal_8wekyb3d8bbwe!App' title='C*' /&gt;" WaitForReady="COMPLETE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:TypeInto.Target>
+                                </ui:TypeInto>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Shared Location AOA  folder is having one more folder, so inside that folder having pdf files executing those all PDF files&quot;]" />
+                                <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <ui:Break sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Break_2" />
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="592,605.6" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If Condition="[currentText.Tostring.ToLower.Contains(&quot;goto :eof&quot;.ToLower)]" DisplayName="If checking execution is completed or not" sap:VirtualizedContainerService.HintSize="529.6,516.8" sap2010:WorkflowViewState.IdRef="If_18">
                                   <If.Then>
-                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,612" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,250.4" sap2010:WorkflowViewState.IdRef="Sequence_48">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type into Exit the cmd window" sap:VirtualizedContainerService.HintSize="433.6,188" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="Y[k(enter)]">
-                                        <ui:TypeInto.Target>
-                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b9830598-c243-413c-baf9-d4703a8b4013" InformativeScreenshot="db2214a16e07d5dc9a1d42fca81fa49b" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft.WindowsTerminal_8wekyb3d8bbwe!App' title='C*' /&gt;" WaitForReady="COMPLETE">
-                                            <ui:Target.TimeoutMS>
-                                              <InArgument x:TypeArguments="x:Int32" />
-                                            </ui:Target.TimeoutMS>
-                                          </ui:Target>
-                                        </ui:TypeInto.Target>
-                                      </ui:TypeInto>
-                                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Shared Location AOA  folder is having one more folder, so inside that folder having pdf files executing those all PDF files&quot;]" />
-                                      <Assign sap:VirtualizedContainerService.HintSize="433.6,112.8" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_18">
                                         <Assign.To>
                                           <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
                                         </Assign.To>
@@ -677,55 +605,443 @@
                                           <InArgument x:TypeArguments="x:Boolean">True</InArgument>
                                         </Assign.Value>
                                       </Assign>
-                                      <ui:Break sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Break_1" />
+                                      <ui:Break sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Break_3" />
                                     </Sequence>
                                   </If.Then>
                                   <If.Else>
-                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="496,193.6" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_49">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_13">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                                        </Assign.Value>
-                                      </Assign>
                                     </Sequence>
                                   </If.Else>
                                 </If>
                               </Sequence>
-                            </ActivityAction>
-                          </ui:ForEach.Body>
-                        </ui:ForEach>
-                      </Sequence>
-                      <Assign sap:VirtualizedContainerService.HintSize="688,104.8" sap2010:WorkflowViewState.IdRef="Assign_3">
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ForEach>
+                </Sequence>
+                <If Condition="[Now.Subtract(StartTime).TotalSeconds&gt;3600]" DisplayName="If 1 hour is completed and notify via send the email like still bot is running" sap:VirtualizedContainerService.HintSize="784,76" sap2010:WorkflowViewState.IdRef="If_19">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence DisplayName="Notifying via email." sap:VirtualizedContainerService.HintSize="416,24.8" sap2010:WorkflowViewState.IdRef="Sequence_54">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_19">
                         <Assign.To>
-                          <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
+                          <OutArgument x:TypeArguments="s:String[]">[Arr_GetShareFileFullPath]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="x:Boolean">[if(Bool_CheckingFolder = False,True,False)]</InArgument>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("FullPathForSharedFile").ToString,in_Config("ShareFileFilterOption").ToString)]</InArgument>
                         </Assign.Value>
+                      </Assign>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Notifications\SendNotificationEmail.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Framework\SendNotificationEmail.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_ApplicationID">[in_Config("AAP_50_AzureApplicationID").ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_TenantID">[in_Config("AAP_50_AzureTenantID").ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_ClientCredentialsName">[in_Config("O365ClientCredential").ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_ToEmailList">[in_Config("Email_To").ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Subject">["Bot Running Smoothly– PDF Files Still Available in Shared Location and Machine Name is: "+Environment.MachineName.ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Body">["The bot is functioning correctly, and PDF files are still present in the shared file location. The current count of available PDFs is: "+Arr_GetShareFileFullPath.Count.ToString]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="In_Screenshot">[Nothing]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_Account">[in_Config("Email_Id").ToString]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
+                      </ui:InvokeWorkflowFile>
+                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_20">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                        </Assign.Value>
                       </Assign>
+                      <Delay DisplayName="Delay - for 5 mints" Duration="00:05:00" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Delay_5" />
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="496,368" sap2010:WorkflowViewState.IdRef="Sequence_55">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_21">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[Arr_GetShareFileFullPath]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("FullPathForSharedFile").ToString,in_Config("ShareFileFilterOption").ToString)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;in share file location and still pdf count is: &quot;+Arr_GetShareFileFullPath.Count.ToString]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:LogMessage>
                     </Sequence>
                   </If.Else>
                 </If>
               </Sequence>
             </ui:InterruptibleDoWhile.Body>
             <ui:InterruptibleDoWhile.Condition>
-              <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="boolExitLoop=False" />
+              <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="Bool_CheckingFolder = False" />
             </ui:InterruptibleDoWhile.Condition>
           </ui:InterruptibleDoWhile>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="880,76" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="784,1664.8" sap2010:WorkflowViewState.IdRef="Sequence_53">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[boolExitLoop=False]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="721.6,1576" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+                  <ui:InterruptibleDoWhile.Body>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="688,1438.4" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Name="GetShareFile_Exist" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="625.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[Arr_GetShareFileFullPath]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("FullPathForSharedFile").ToString,in_Config("ShareFileFilterOption").ToString)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[Arr_GetShareFileFullPath.Count &gt; 0]" DisplayName="If  Checking ExitLoop Validations" sap:VirtualizedContainerService.HintSize="625.6,1236" sap2010:WorkflowViewState.IdRef="If_10">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="592,824" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If Condition="[Now.Subtract(StartTime).TotalSeconds&gt;3600]" DisplayName="If 1 hour is completed and notify via send the email like still bot is running" sap:VirtualizedContainerService.HintSize="529.6,735.2" sap2010:WorkflowViewState.IdRef="If_8">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence DisplayName="Notifying via email." sap:VirtualizedContainerService.HintSize="416,83.2" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Notifications\SendNotificationEmail.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,206.4" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\SendNotificationEmail.xaml">
+                                    <ui:InvokeWorkflowFile.Arguments>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_ApplicationID">[in_Config("AAP_50_AzureApplicationID").ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_TenantID">[in_Config("AAP_50_AzureTenantID").ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_ClientCredentialsName">[in_Config("O365ClientCredential").ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_ToEmailList">[in_Config("Email_To").ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_Subject">["Bot Running Smoothly– PDF Files Still Available in Shared Location and Machine Name is: "+Environment.MachineName.ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_Body">["The bot is functioning correctly, and PDF files are still present in the shared file location. The current count of available PDFs is: "+Arr_GetShareFileFullPath.Count.ToString]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="In_Screenshot">[Nothing]</InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="in_Account">[in_Config("Email_Id").ToString]</InArgument>
+                                    </ui:InvokeWorkflowFile.Arguments>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:InvokeWorkflowFile>
+                                  <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Delay DisplayName="Delay - for 5 mints" Duration="00:05:00" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="496,490.4" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Bot is running and still pdf files available in share file location and still pdf count is: &quot;+Arr_GetShareFileFullPath.Count.ToString]">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:LogMessage>
+                                  <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Delay DisplayName="Delay - for 5 mints" Duration="00:05:00" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Delay_4" />
+                                </Sequence>
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="512,250.4" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Sequence sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:String" Name="OCR_Text" />
+                                <Variable x:TypeArguments="x:String" Name="GetShareFileText" />
+                                <Variable x:TypeArguments="x:String" Name="ReadTextFile" />
+                                <Variable x:TypeArguments="s:String[]" Name="Arr_TextFile_Data" />
+                                <Variable x:TypeArguments="x:Boolean" Name="GetShareFiles_Exist" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[GetShareFiles_Exist]" sap:VirtualizedContainerService.HintSize="721.6,148" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="Data\GetshareFile.txt" PathType="File" />
+                              <If Condition="[GetShareFiles_Exist = True]" sap:VirtualizedContainerService.HintSize="721.6,468" sap2010:WorkflowViewState.IdRef="If_12">
+                                <If.Then>
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,192.8" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="353.6,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="Data\GetshareFile.txt" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                              <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'Windows.UI.Composition....'" sap:VirtualizedContainerService.HintSize="721.6,204" sap2010:WorkflowViewState.IdRef="GetOCRText_1">
+                                <ui:GetOCRText.OCREngine>
+                                  <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                    <ActivityFunc.Argument>
+                                      <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                                    </ActivityFunc.Argument>
+                                    <p:UiPathDocumentOCR Output="{x:Null}" PredictionId="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="ZFyVk/UIAN8B5x8TgIzwg7jNbTM14iiJGoGBvPwOpTUDEj65KrhOEYTp828fKCA1oG+27QrR7Xi0r/vOcz1JYw==" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" Endpoint="https://du.uipath.com/ocr" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_1" Image="[Image]" Language="auto" NoopExecution="False" Profile="None" Scale="1" Timeout="100000" />
+                                  </ActivityFunc>
+                                </ui:GetOCRText.OCREngine>
+                                <ui:GetOCRText.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7cf42528-085c-4bf5-9137-ade4d7a95896" InformativeScreenshot="ea91b50338d76e28b903456254442039" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft*' title='C*' /&gt;&lt;wnd cls='Windows.UI.Composition.DesktopWindowContentBridge' title='DesktopWindowXamlSource' /&gt;" WaitForReady="COMPLETE">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                  </ui:Target>
+                                </ui:GetOCRText.Target>
+                                <ui:GetOCRText.Text>
+                                  <OutArgument x:TypeArguments="x:String">[OCR_Text]</OutArgument>
+                                </ui:GetOCRText.Text>
+                              </ui:GetOCRText>
+                              <Assign sap:VirtualizedContainerService.HintSize="721.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[GetShareFileText]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">Data\GetshareFile.txt</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="721.6,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[OCR_Text]" />
+                              <ui:ReadTextFile File="{x:Null}" Content="[ReadTextFile]" DisplayName="Read Text File" FileName="[GetShareFileText]" sap:VirtualizedContainerService.HintSize="721.6,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                              <Assign sap:VirtualizedContainerService.HintSize="721.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="s:String[]">[Arr_TextFile_Data]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="s:String[]">[ReadTextFile.ToString.Split(Environment.NewLine.ToCharArray)]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="721.6,1020" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[Arr_TextFile_Data]">
+                                <ui:ForEach.Body>
+                                  <ActivityAction x:TypeArguments="x:String">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="688,882.4" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If Condition="[currentText.Tostring.ToLower.Contains(&quot;Are you sure (Y/N)?&quot;.ToLower) And Bool_CheckingFolder = False Or currentText.Tostring.ToLower.Contains(&quot;Are (Y/N)?&quot;.ToLower)  And Bool_CheckingFolder = False]" DisplayName="If Inside folder is exist then block execut" sap:VirtualizedContainerService.HintSize="625.6,793.6" sap2010:WorkflowViewState.IdRef="If_11">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,83.2" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type into Exit the cmd window" sap:VirtualizedContainerService.HintSize="433.6,188" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="Y[k(enter)]">
+                                              <ui:TypeInto.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b9830598-c243-413c-baf9-d4703a8b4013" InformativeScreenshot="db2214a16e07d5dc9a1d42fca81fa49b" Selector="&lt;wnd app='windowsterminal.exe' appid='Microsoft.WindowsTerminal_8wekyb3d8bbwe!App' title='C*' /&gt;" WaitForReady="COMPLETE">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                </ui:Target>
+                                              </ui:TypeInto.Target>
+                                            </ui:TypeInto>
+                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Shared Location AOA  folder is having one more folder, so inside that folder having pdf files executing those all PDF files&quot;]" />
+                                            <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                            <ui:Break sap:VirtualizedContainerService.HintSize="433.6,48" sap2010:WorkflowViewState.IdRef="Break_1" />
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="592,548.8" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <If Condition="[currentText.Tostring.ToLower.Contains(&quot;goto :eof&quot;.ToLower)]" DisplayName="If checking execution is completed or not" sap:VirtualizedContainerService.HintSize="529.6,460" sap2010:WorkflowViewState.IdRef="If_15">
+                                              <If.Then>
+                                                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,193.6" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <Assign sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="x:Boolean">[Bool_CheckingFolder]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                </Sequence>
+                                              </If.Then>
+                                              <If.Else>
+                                                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </Sequence>
+                                              </If.Else>
+                                            </If>
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:ForEach.Body>
+                              </ui:ForEach>
+                            </Sequence>
+                            <Assign sap:VirtualizedContainerService.HintSize="449.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_3">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[boolExitLoop]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">[if(Bool_CheckingFolder = False,True,False)]</InArgument>
+                              </Assign.Value>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Assign>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </ui:InterruptibleDoWhile.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:InterruptibleDoWhile>
+              </Sequence>
+            </ui:CommentOut.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CommentOut>
         </Sequence>
       </If.Then>
       <If.Else>
@@ -777,6 +1093,8 @@
       </If.Else>
     </If>
     <ui:SetAsset TimeoutMS="{x:Null}" AssetName="Triggered_LoadVisiflow" DisplayName="Set Asset" FolderPath="AssignmentOfAgent" sap:VirtualizedContainerService.HintSize="976,227.2" sap2010:WorkflowViewState.IdRef="SetAsset_1" Value="[True]" />
+    <ui:SetAsset TimeoutMS="{x:Null}" AssetName="UID" DisplayName="Set Asset - UID" FolderPath="AssignmentOfAgent" sap:VirtualizedContainerService.HintSize="976,227.2" sap2010:WorkflowViewState.IdRef="SetAsset_3" Value="[in_TransactionItem.SpecificContent(&quot;DB_UID&quot;).ToString]" />
+    <ui:SetAsset TimeoutMS="{x:Null}" AssetName="Queue_Feeding_ParcelCount" DisplayName=" Set Asset - Parcel Count" FolderPath="AssignmentOfAgent" sap:VirtualizedContainerService.HintSize="976,227.2" sap2010:WorkflowViewState.IdRef="SetAsset_2" Value="[Convert.ToInt32(in_TransactionItem.SpecificContent(&quot;DB_TotalParcelsCount&quot;).ToString)]" />
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="976,79.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
   </Sequence>
 </Activity>
